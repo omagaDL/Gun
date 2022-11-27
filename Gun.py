@@ -243,6 +243,7 @@ class Bomb:
         return False
 
 
+
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 bullet = 0
@@ -255,8 +256,24 @@ target = Target()
 extrtarget = Target()
 finished = False
 a = 0
+flag = 0
+
 
 while not finished:
+    if flag == 1:
+        pygame.init()
+        screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        bullet = 0
+        balls = []
+        bombs = []
+
+        clock = pygame.time.Clock()
+        gun = Gun(screen)
+        target = Target()
+        extrtarget = Target()
+        finished = False
+        a = 0
+        flag = 0
     screen.fill(WHITE)
     gun.draw()
     target.draw()
@@ -289,8 +306,7 @@ while not finished:
                 bmb.live = 0
                 bmb.hit()
             if bmb.BOOM(gun):
-                time.sleep(1)
-                finished = True
+                flag = 1
         b.move()
         if b.hittest(target) and target.live:
             target.live = 0
